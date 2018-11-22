@@ -55,7 +55,7 @@ class Api
       end
       # Increment our index by 25 to return jobs 26..50 after the iteration
       @job_index += 25
-      puts "Gathered #{@job_index}/#{@@total_jobs_found}"
+      puts "Gathered #{Job.all.count}/#{@@total_jobs_found}"
       sleep(@delay)
     end
   end
