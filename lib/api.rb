@@ -2,6 +2,7 @@ require 'open-uri'
 require 'JSON'
 require 'byebug'
 require_relative 'job'
+require_relative 'location'
 
 class Api
   # Adjust to change delay between API requests
@@ -37,8 +38,20 @@ class Api
       # parsed_data['results'] contains a hash for each job listing (25 per API query)
       parsed_data['results'].each do |job_hash|
         job_hash.each do |job_attr, value|
-          Job.new(job_hash['jobtitle']) if job_attr == 'jobtitle'
+          # Job.create_job(job_hash['jobtitle']) if job_attr == 'jobtitle'
+          @job_title = job_hash['jobtitle'] if job_attr == 'jobtitle'
+
+          # Create a job object one time only
+          @location_obj = Location.new(job_hash['formattedLocation']) if job_attr == 'formattedLocation' && Location.all.count == 0
         end
+        
+        # Create a job instance, passing in the location instance as the job's location attribute
+        # Every job knows about the location object associated with it
+        job_obj = Job.new(@job_title, @location_obj)
+        
+        # Push the job onto the location's job array
+        # A location knows about all job objects associated with it
+        @location_obj.job = job_obj        
       end
       # Increment our index by 25 to return jobs 26..50 after the iteration
       @job_index += 25
