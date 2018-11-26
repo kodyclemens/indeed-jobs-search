@@ -3,7 +3,7 @@ require 'byebug'
 class Location
   # Base class
   attr_accessor :job
-  attr_reader :name, :job
+  attr_reader :name
 
   @@all = []
   def initialize(name)
