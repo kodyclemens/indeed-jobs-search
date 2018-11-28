@@ -1,9 +1,3 @@
-require 'open-uri'
-require 'JSON'
-require 'byebug'
-require_relative 'job'
-require_relative 'location'
-
 class Api
   # Adjust to change delay between API requests
   # Set equal to amount of seconds

@@ -1,6 +1,4 @@
-require_relative 'api'
-require_relative 'job'
-require 'byebug'
+require_relative '../config/environment'
 
 class CLI
   # Test data for now

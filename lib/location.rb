@@ -1,5 +1,3 @@
-require 'byebug'
-
 class Location
   # Base class
   attr_accessor :job

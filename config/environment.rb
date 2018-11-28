@@ -1,0 +1,6 @@
+require 'open-uri'
+require 'JSON'
+require 'byebug'
+require_relative '../lib/api'
+require_relative '../lib/job'
+require_relative '../lib/location'

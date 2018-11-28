@@ -1,5 +1,3 @@
-require 'byebug'
-
 class Job
   # Base class
   attr_reader :name, :location
