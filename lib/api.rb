@@ -65,20 +65,19 @@ class Api
     Time.at(@@expected_time_to_complete).utc.strftime("%H:%M:%S")
   end
 
-  private
-    def self.update_url(updated_job_index)
-      @job_index = updated_job_index
-      url = "http://api.indeed.com/ads/apisearch?publisher=#{read_api_key}&q=#{@user_job_title}&l=#{@user_job_location}&latlong=1&co=us&v=2&limit=25&format=json&start=#{@job_index}"
-    end
+  def self.update_url(updated_job_index)
+    @job_index = updated_job_index
+    url = "http://api.indeed.com/ads/apisearch?publisher=#{read_api_key}&q=#{@user_job_title}&l=#{@user_job_location}&latlong=1&co=us&v=2&limit=25&format=json&start=#{@job_index}"
+  end
 
-    def self.parse_url(api_url)
-      unparsed_data = open(api_url + "&start=0").read
-      parsed_data = JSON.parse(unparsed_data)
-    end
+  def self.parse_url(api_url)
+    unparsed_data = open(api_url + "&start=0").read
+    parsed_data = JSON.parse(unparsed_data)
+  end
 
-    def self.read_api_key
-      # Read API key from file
-      # gitignore api.txt to keep key private
-      @@api_key = File.open('../api.txt', 'r').read
-    end
+  def self.read_api_key
+    # Read API key from file
+    # gitignore api.txt to keep key private
+    @@api_key = File.open('../api.txt', 'r').read
+  end
 end

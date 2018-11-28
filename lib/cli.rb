@@ -2,6 +2,7 @@ require_relative '../config/environment'
 
 class CLI
   def start
+    # debugger
     print 'Please enter a job title: '
     user_job_title = gets.chomp
     print 'Please enter a location: '
