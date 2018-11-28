@@ -1,7 +1,5 @@
 class Location
-  # Base class
-  attr_accessor :job
-  attr_reader :name
+  attr_reader :name, :job
 
   @@all = []
   def initialize(name)

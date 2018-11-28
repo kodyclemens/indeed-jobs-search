@@ -1,7 +1,7 @@
 class Api
   # Adjust to change delay between API requests
   # Set equal to amount of seconds
-  @delay = 2
+  @delay = 0.5
 
   def self.set_user_search(user_job_title, user_job_location)
     # Format user input appropriately. URL encode all spaces and commas
@@ -31,21 +31,21 @@ class Api
 
       # parsed_data['results'] contains a hash for each job listing (25 per API query)
       parsed_data['results'].each do |job_hash|
-        job_hash.each do |job_attr, value|
+        job_hash.each do |job_attr, _value|
           # Job.create_job(job_hash['jobtitle']) if job_attr == 'jobtitle'
           @job_title = job_hash['jobtitle'] if job_attr == 'jobtitle'
 
           # Create a job object one time only
           @location_obj = Location.new(job_hash['formattedLocation']) if job_attr == 'formattedLocation' && Location.all.count == 0
         end
-        
+
         # Create a job instance, passing in the location instance as the job's location attribute
         # Every job knows about the location object associated with it
         job_obj = Job.new(@job_title, @location_obj)
-        
+
         # Push the job onto the location's job array
         # A location knows about all job objects associated with it
-        @location_obj.job = job_obj        
+        @location_obj.job = job_obj
       end
       # Increment our index by 25 to return jobs 26..50 after the iteration
       @job_index += 25
