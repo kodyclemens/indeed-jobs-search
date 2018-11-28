@@ -8,8 +8,9 @@ class CLI
   end
 
   def start
+    clear_terminal
     display_logo if @logo_displayed == 0
-    puts "Type " + Rainbow("help ").red.bright + "at any time for example queries."
+    puts "Type " + Rainbow("help ").green.bright + "at any time for example input."
     @job_title = get_search_input("job title")
     @job_location = get_search_input("job location")
     Api.set_user_search(@job_title, @job_location)
@@ -21,10 +22,11 @@ class CLI
 
   def display_logo
     # ASCII from https://www.asciiart.eu/computers/computers
+    flatiron = Rainbow("//").cyan
     puts Rainbow("
           ,---------------------------,
           |  /---------------------\\  |
-          | |   //                  | |
+          | |   #{flatiron}                  | |
           | |     Indeed            | |
           | |      Jobs             | |
           | |       Search          | |
@@ -41,7 +43,7 @@ class CLI
     /-------------------------------------/|  ( )/
   /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
 /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n").cyan.bright
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n").white
     @logo_displayed = 1
   end
 
